@@ -1,0 +1,28 @@
+{% extends 'flatpages/default.html' %} 
+{% load custom_filters %}
+{% block title %}
+<h1>Актуальное</h1>
+{% endblock title %}
+
+{% block content %}
+<div align="left"><h3>Количество новостей: {{ Posts|length}} </h3>
+{% if Posts %}
+<table>
+    <tr>
+        <td>Заголовок</td>
+        <td>Дата публикации</td>
+        <td>Содержание</td>
+    </tr>
+    {% for Post in Posts %}
+    <tr>
+        <td>{{Post.title|censor}}</td>
+        <td>{{Post.dateCreation}}</td>
+        <td>{{Post.text|truncatechars:20|censor }}</td>
+    </tr>
+    {% endfor %}
+</table>
+
+{% else %}
+<h4>Новостей нет!</h4>
+{% endif %}
+{% endblock content %}
